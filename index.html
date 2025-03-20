@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1><b><i>Study Application</i></b></h1>
+
+        <div id="sections-container">
+            <section id="cards">
+                <h2>Enter Cards</h2>
+                <form id="meal-section" action='insert.php' method='post'>
+                    <label for="question">Question</label>
+                    <input type="text" id="question" required><br>
+                    <label for="answer">Answer</label>
+                    <input type="number" id="answer" required><br>
+                    <button type="submit">Add Card</button>
+                </form>
+            </section>
+
+        <section id="summary-section">
+            <h2>Card List</h2>
+        
+            <div id="summary-container">
+                <div class="summary-box">
+                    <h3>Questions</h3>
+                    <ul id="question-summary"></ul>
+                </div>
+        
+                <div class="summary-box">
+                    <h3>Answers</h3>
+                    <ul id="answer-summary"></ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>
