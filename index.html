@@ -3,41 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Application</title>
+    <title>Flashcard Study App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1><b><i>Study Application</i></b></h1>
+        <h1 style="color:white; background-color: blue; border: 3px solid blueviolet; border-radius: 10px;"><b><i>Flashcard Study App</i></b></h1>
 
-        <div id="sections-container">
-            <section id="cards">
-                <h2>Enter Cards</h2>
-                <form id="meal-section" action='insert.php' method='post'>
-                    <label for="question">Question</label>
-                    <input type="text" id="question" required><br>
-                    <label for="answer">Answer</label>
-                    <input type="number" id="answer" required><br>
-                    <button type="submit">Add Card</button>
-                </form>
-            </section>
-
-        <section id="summary-section">
-            <h2>Card List</h2>
-        
-            <div id="summary-container">
-                <div class="summary-box">
-                    <h3>Questions</h3>
-                    <ul id="question-summary"></ul>
-                </div>
-        
-                <div class="summary-box">
-                    <h3>Answers</h3>
-                    <ul id="answer-summary"></ul>
-                </div>
-            </div>
+        <section id="add-card-section">
+            <h2>Add Flashcard</h2>
+            <form id="card-form">
+                <label for="card-question">Question:</label>
+                <input type="text" id="card-question" required><br>
+                <label for="card-answer">Answer:</label>
+                <input type="text" id="card-answer" required><br>
+                <button type="submit">Add Flashcard</button>
+            </form>
         </section>
 
+        <section id="flashcard-review">
+            <h2>Review Flashcards</h2>
+            <div id="flashcard-container"></div>
+            <button id="next-card">Next Card</button>
+        </section>
+
+        <section id="import-notes">
+            <h2>Import Notes</h2>
+            <input type="file" id="import-file" accept=".txt">
+            <button id="import-btn">Import</button>
+        </section>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cardForm = document.getElementById("card-form");
+            const flashcardContainer = document.getElementById("flashcard-container");
+            const nextCardButton = document.getElementById("next-card");
+            const importBtn = document.getElementById("import-btn");
+            const importFile = document.getElementById("import-file");
+
+            let flashcards = [];
+            let currentIndex = 0;
+
+            cardForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                const question = document.getElementById("card-question").value;
+                const answer = document.getElementById("card-answer").value;
+                flashcards.push({ question, answer });
+                document.getElementById("card-question").value = "";
+                document.getElementById("card-answer").value = "";
+                alert("Flashcard added!");
+            });
+
+            nextCardButton.addEventListener("click", function () {
+                if (flashcards.length > 0) {
+                    const card = flashcards[currentIndex];
+                    flashcardContainer.innerHTML = `<div class='flashcard'>
+                        <p>${card.question}</p>
+                        <button onclick="this.nextElementSibling.style.display='block'">Show Answer</button>
+                        <p style='display:none;'>${card.answer}</p>
+                    </div>`;
+                    currentIndex = (currentIndex + 1) % flashcards.length;
+                } else {
+                    alert("No flashcards available.");
+                }
+            });
+
+            importBtn.addEventListener("click", function () {
+                const file = importFile.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const lines = e.target.result.split('\n');
+                        lines.forEach(line => {
+                            const [question, answer] = line.split(" - ");
+                            if (question && answer) {
+                                flashcards.push({ question, answer });
+                            }
+                        });
+                        alert("Notes imported successfully!");
+                    };
+                    reader.readAsText(file);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

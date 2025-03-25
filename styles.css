@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(149, 255, 248);
+    height: 90%;
+    text-align: center;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 30px;
+    border: 5px solid rgb(47, 47, 143);
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+h2 {
+    color: #192891;
+    font-family: 'Arial', Times, serif;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+button {
+    background-color: #0000FF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #00F0FF;
+}
+
+#flashcard-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flashcard {
+    width: 60%;
+    padding: 20px;
+    border: 3px solid #192891;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.flashcard p {
+    font-size: 1.2em;
+}
+
+#next-card {
+    display: block;
+    margin: 20px auto;
+}
